@@ -10,79 +10,103 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
+    @EnvironmentObject var network: Network
+    /*@FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Item>*/
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
+            List{
+                ForEach(network.cryptocurrencies) { cryptocurrency in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        ScrollView {
+                            VStack {
+                                Text("\(cryptocurrency.name.capitalized) - \(cryptocurrency.symbol.uppercased())")
+                                    .font(.title)
+                                AsyncImage(url: URL(string: cryptocurrency.image)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                } placeholder: {
+                                    Image(systemName: "slowmo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                .frame(width: 50, height: 50)
+                                Text("Current price: $\(cryptocurrency.current_price)")
+                                Text("Last Updated: \(cryptocurrency.last_updated)")
+                                    .lineLimit(1)
+                                Text("Total volume: \(cryptocurrency.total_volume)")
+                                Text("Highest price: $\(cryptocurrency.high_24h)")
+                                Text("Lowest price: $\(cryptocurrency.low_24h)")
+                                Text("Price change: \(cryptocurrency.price_change_24h)")
+                                Text("Market cap: \(cryptocurrency.market_cap)")
+                            }
+                        }
+                        
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        VStack {
+                            HStack {
+                                AsyncImage(url: URL(string: cryptocurrency.image)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                    
+                                } placeholder: {
+                                    Image(systemName: "slowmo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                                .frame(width: 20, height: 20)
+                                Text("\(cryptocurrency.name) - \(cryptocurrency.symbol.uppercased())")
+                            }
+                            HStack {
+                                Text("$\(cryptocurrency.current_price)")
+                                Text("\(cryptocurrency.last_updated)")
+                                    .lineLimit(1)
+                            }
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: loadCryptocurrencies) {
+                        Image(systemName: "coloncurrencysign.circle")
+                    }
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                ToolbarItem(placement: .principal) {
+                    Text("CRYPTOCURRENCIES")
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: loadCryptocurrencies) {
+                        Image(systemName: "goforward")
                     }
                 }
             }
-            Text("Select an item")
+        }
+        .onAppear {
+            loadCryptocurrencies()
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    
+    private func loadCryptocurrencies() {
+        network.getCryptocurrencies()
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+    
+    private let itemFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
+        return formatter
+    }()
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(Network())
     }
 }

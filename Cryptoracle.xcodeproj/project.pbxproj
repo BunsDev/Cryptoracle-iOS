@@ -16,6 +16,8 @@
 		BC8E333F2AAFEE45003EA161 /* CryptoracleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E333E2AAFEE45003EA161 /* CryptoracleTests.swift */; };
 		BC8E33492AAFEE45003EA161 /* CryptoracleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E33482AAFEE45003EA161 /* CryptoracleUITests.swift */; };
 		BC8E334B2AAFEE45003EA161 /* CryptoracleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8E334A2AAFEE45003EA161 /* CryptoracleUITestsLaunchTests.swift */; };
+		BCE00B672AB80CBF00B46B36 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE00B662AB80CBF00B46B36 /* Network.swift */; };
+		BCE00B692AB80D2B00B46B36 /* Cryptocurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE00B682AB80D2B00B46B36 /* Cryptocurrency.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		BC8E33442AAFEE45003EA161 /* CryptoracleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoracleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC8E33482AAFEE45003EA161 /* CryptoracleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoracleUITests.swift; sourceTree = "<group>"; };
 		BC8E334A2AAFEE45003EA161 /* CryptoracleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoracleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BCE00B662AB80CBF00B46B36 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		BCE00B682AB80D2B00B46B36 /* Cryptocurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptocurrency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				BC8E33312AAFEE45003EA161 /* Persistence.swift */,
 				BC8E33332AAFEE45003EA161 /* Cryptoracle.xcdatamodeld */,
 				BC8E332E2AAFEE45003EA161 /* Preview Content */,
+				BCE00B662AB80CBF00B46B36 /* Network.swift */,
+				BCE00B682AB80D2B00B46B36 /* Cryptocurrency.swift */,
 			);
 			path = Cryptoracle;
 			sourceTree = "<group>";
@@ -263,6 +269,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCE00B672AB80CBF00B46B36 /* Network.swift in Sources */,
+				BCE00B692AB80D2B00B46B36 /* Cryptocurrency.swift in Sources */,
 				BC8E33352AAFEE45003EA161 /* Cryptoracle.xcdatamodeld in Sources */,
 				BC8E33322AAFEE45003EA161 /* Persistence.swift in Sources */,
 				BC8E332B2AAFEE44003EA161 /* ContentView.swift in Sources */,
@@ -422,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cryptoracle/Preview Content\"";
@@ -440,6 +449,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jondhc.Cryptoracle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -451,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cryptoracle/Preview Content\"";
@@ -469,6 +480,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jondhc.Cryptoracle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
